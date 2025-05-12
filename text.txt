@@ -1,0 +1,104 @@
+[Convert]::ToBase64String((Get-Content -Path "Recording.m4a" -Encoding Byte)) > encoded_audio.txt
+
+
+
+
+But because she had to go to work, the only time she could do it was at 4:30 in the morning. But whenever I'd complained, my mother would just give me one of those looks, and she'd say, this is no picnic for me either.
+
+
+
+
+aws lambda invoke  --function-name uploadAudioHandler  --payload file://event.json  output.json
+
+
+
+
+
+
+
+
+curl -X POST https://ewlue8t3if.execute-api.us-east-1.amazonaws.com/dev/upload -H "Content-Type: application/json" -d @payload.json
+
+
+
+
+Invoke-RestMethod -Method POST `
+  -Uri "https://i2g77wrsxh.execute-api.us-east-1.amazonaws.com/dev/upload" `
+  -ContentType "application/json" `
+  -Body (Get-Content -Raw -Path "payload.json")
+
+
+https://54dnau3qjk.execute-api.us-east-1.amazonaws.com/dev
+
+
+
+curl.exe -X POST https://54dnau3qjk.execute-api.us-east-1.amazonaws.com/dev/upload`
+  -H "Content-Type: application/json" `
+  -d "@payload.json"
+
+
+
+https://jm4j92s2tg.execute-api.us-east-1.amazonaws.com/dev
+
+
+
+curl -X POST "https://jm4j92s2tg.execute-api.us-east-1.amazonaws.com/dev/upload"`
+  -H "Content-Type: application/json" `
+  -d (Get-Content -Raw -Path .\payload.json)
+
+
+
+
+
+$payload = Get-Content -Raw -Path .\payload.json
+Invoke-RestMethod -Method POST `
+  -Uri "https://jm4j92s2tg.execute-api.us-east-1.amazonaws.com/dev/upload" `
+  -ContentType "application/json" `
+  -Body $payload
+
+
+
+
+
+docker run --rm -v "$HOME\.aws:/root/.aws" -e AWS_REGION=us-east-1  whisper-tiny
+
+
+
+
+
+
+docker run --rm -v "$HOME/.aws:/root/.aws" -e AWS_REGION=us-east-1 -e OUTPUT_KEY=transcripts/lecture1.json whisper-tiny
+
+
+
+
+
+
+$Password = aws ecr get-login-password --region us-east-1
+docker login --username AWS --password $Password 216874796625.dkr.ecr.us-east-1.amazonaws.com
+
+ docker run --rm -v "$HOME/.aws:/root/.aws" -e SQS_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/216874796625/my-sqs-queue -e OUTPUT_BUCKET=transcribe-output-bucket-12344556   -e  AWS_REGION=us-east-1  whisper-tiny
+
+{
+  "bucket": "student-audio-bucket-demo",
+  "key": "Recording.m4a",
+  "student_id": "student001"
+}
+
+
+
+
+docker run --rm -v "$HOME/.aws:/root/.aws" -e AWS_REGION=us-east-1 whisper-tiny aws sts get-caller-identity
+
+
+ docker push 216874796625.dkr.ecr.eu-north-1.amazonaws.com/backend:latest
+
+
+  docker push 216874796625.dkr.ecr.us-east-1.amazonaws.com/whisper-repo:latest
+
+
+
+
+
+
+  aws sqs send-message  --queue-url https://sqs.us-east-1.amazonaws.com/216874796625/Myqueue  --region us-east-1  --message-body '{"bucket": "student-audio-bucket-demo", "key": "Recording.m4a", "student_id": "student001"}'
