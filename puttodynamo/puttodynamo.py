@@ -31,9 +31,13 @@ def lambda_handler(event, context):
         content = response['Body'].read().decode('utf-8')
         transcript_json = json.loads(content)
 
-        # 3. Extract transcript text
-        transcript_text = transcript_json['results']['transcripts'][0]['transcript']
-        logger.info(f"Transcribed text: {transcript_text}")
+        # 3. Extract transcript and new metrics
+        transcript_text = transcript_json['transcript']
+        word_count = transcript_json['word_count']
+        duration = transcript_json['duration_seconds']
+        wpm = transcript_json['wpm']
+        logger.info(f"Transcript: {transcript_text}")
+        logger.info(f"word_count: {word_count}, duration: {duration}, wpm: {wpm}")
 
         # 4. Retrieve original text from DynamoDB
         item = dynamodb.get_item(TableName=TABLE, Key={'id': {'S': audio_id}})
@@ -44,43 +48,17 @@ def lambda_handler(event, context):
         wer_score = wer(original_text, transcript_text)
         logger.info(f"WER score: {wer_score}")
 
-        # 6. Analyze timestamps for WPM and pauses
-        words = [w for w in transcript_json['results']['items'] if w['type'] == 'pronunciation']
-        if len(words) >= 2:
-            start_time = float(words[0]['start_time'])
-            end_time = float(words[-1]['end_time'])
-            duration = end_time - start_time
-            word_count = len(words)
-            wpm = (word_count / duration) * 60 if duration > 0 else 0
-
-            # Calculate pauses longer than 1s
-            pauses = []
-            for i in range(1, len(words)):
-                prev_end = float(words[i - 1]['end_time'])
-                curr_start = float(words[i]['start_time'])
-                gap = curr_start - prev_end
-                if gap > 1.0:
-                    pauses.append(gap)
-            num_pauses = len(pauses)
-            avg_pause = sum(pauses) / num_pauses if pauses else 0.0
-        else:
-            wpm = 0
-            num_pauses = 0
-            avg_pause = 0.0
-
-        logger.info(f"WPM: {wpm}, Pauses: {num_pauses}, Avg Pause: {avg_pause:.2f}s")
-
-        # 7. Update DynamoDB
+        # 6. Update DynamoDB
         response = dynamodb.update_item(
             TableName=TABLE,
             Key={'id': {'S': audio_id}},
-            UpdateExpression="SET transcribed_text = :t, wer_score = :w, wpm = :p, pauses = :pa, avg_pause = :ap",
+            UpdateExpression="SET transcribed_text = :t, wer_score = :w, word_count = :wc, duration_seconds = :d, wpm = :p",
             ExpressionAttributeValues={
                 ':t': {'S': transcript_text},
                 ':w': {'N': str(round(wer_score, 4))},
-                ':p': {'N': str(round(wpm, 2))},
-                ':pa': {'N': str(num_pauses)},
-                ':ap': {'N': str(round(avg_pause, 2))}
+                ':wc': {'N': str(word_count)},
+                ':d': {'N': str(duration)},
+                ':p': {'N': str(round(wpm, 2))}
             }
         )
         logger.info(f"DynamoDB update response: {response}")
@@ -88,12 +66,12 @@ def lambda_handler(event, context):
         return {
             'statusCode': 200,
             'body': json.dumps({
-                'message': 'Transcript, WER, and fluency metrics saved to DynamoDB',
+                'message': 'Transcript and metrics saved to DynamoDB',
                 'id': audio_id,
                 'wer_score': round(wer_score, 4),
                 'wpm': round(wpm, 2),
-                'pauses': num_pauses,
-                'avg_pause': round(avg_pause, 2)
+                'word_count': word_count,
+                'duration_seconds': duration
             })
         }
 
