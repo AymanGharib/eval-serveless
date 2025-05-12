@@ -76,6 +76,16 @@ resource "aws_iam_role_policy" "lambda_policy" {
         ],
         Resource = "*"
       },
+        {
+        Effect = "Allow",
+        Action = [
+          "sqs:ReceiveMessage",
+          "sqs:DeleteMessage",
+          "sqs:GetQueueAttributes",
+          "sqs:SendMessage"
+        ],
+        Resource = "arn:aws:sqs:us-east-1:216874796625:Myqueue"
+      },
       {
         Effect = "Allow",
         Action = [
@@ -110,6 +120,7 @@ resource "aws_lambda_function" "audio_handler" {
     variables = {
       AUDIO_BUCKET = aws_s3_bucket.audio_bucket.bucket
       DDB_TABLE    = aws_dynamodb_table.reading_table.name
+      SQS_URL    = "https://sqs.us-east-1.amazonaws.com/216874796625/Myqueue"
     }
   }
 }

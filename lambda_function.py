@@ -5,11 +5,12 @@ import json
 from datetime import datetime
 
 s3 = boto3.client('s3')
-transcribe = boto3.client('transcribe')
 dynamodb = boto3.client('dynamodb')
+sqs = boto3.client('sqs')
 
 BUCKET = os.environ['AUDIO_BUCKET']
 TABLE = os.environ['DDB_TABLE']
+SQS_URL = os.environ['SQS_URL']  # Add this to your Lambda environment variables
 
 def lambda_handler(event, context):
     try:
@@ -18,11 +19,11 @@ def lambda_handler(event, context):
         original_text = body['original_text']
         audio_data = base64.b64decode(body['audio_base64'])
 
-        # Upload to S3
+        # Upload audio to S3
         audio_key = f"{audio_id}.wav"
         s3.put_object(Bucket=BUCKET, Key=audio_key, Body=audio_data)
 
-        # Store original text in DynamoDB
+        # Save original text to DynamoDB
         dynamodb.put_item(
             TableName=TABLE,
             Item={
@@ -32,18 +33,21 @@ def lambda_handler(event, context):
             }
         )
 
-        # Start Transcribe job
-        job_uri = f"s3://{BUCKET}/{audio_key}"
-        transcribe.start_transcription_job(
-            TranscriptionJobName=audio_id,
-            LanguageCode='en-US',
-            Media={'MediaFileUri': job_uri},
-            OutputBucketName="transcribe-output-bucket-12344556"
+        # Prepare and send message to SQS
+        message = {
+            'student_id': audio_id,
+            'bucket': BUCKET,
+            'key': audio_key
+        }
+
+        sqs.send_message(
+            QueueUrl=SQS_URL,
+            MessageBody=json.dumps(message)
         )
 
         return {
             "statusCode": 200,
-            "body": json.dumps({"message": "Audio uploaded and transcription started."})
+            "body": json.dumps({"message": "Audio uploaded and SQS message sent."})
         }
 
     except Exception as e:
