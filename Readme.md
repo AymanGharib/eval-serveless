@@ -24,7 +24,25 @@ docker push <repo_url>/whisper-repo:vfinale
 
 ```bash
 terraform apply -var="image=<image-url>" --auto-approve
+
 ```
+### ⚙️ use post man or curl (or invoke url for powershell)
+
+```bash
+Invoke-RestMethod -Method POST `
+   -Uri <gateway_url>/upload `
+   -ContentType "application/json" `
+  -Body (Get-Content -Raw -Path "payload.json")
+
+or : 
+
+curl -X POST \
+ <gateway_url>/upload \
+  -H "Content-Type: application/json" \
+  -d @payload.json
+
+```
+
 
 
 ## 1. 🔍 Introduction
@@ -78,6 +96,8 @@ Below is a step-by-step breakdown of how the system works:
   * `encoded_audio` (Base64)
 
 ➡️ **API Gateway** receives this input and triggers the uploader Lambda function.
+
+
 
 ---
 
