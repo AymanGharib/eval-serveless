@@ -94,7 +94,7 @@ Below is a step-by-step breakdown of how the system works:
 
 
   **Example Payload message:**
-  ```json
+```json
 {
     "id": "marry",
     "original_text": "But because she had to go to work, the only time she could do it was at 4:30 in the morning. But whenever I'd complained, my mother would just give me one of those looks, and she'd say, this is no picnic for me either.",
