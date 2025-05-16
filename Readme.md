@@ -247,9 +247,7 @@ then WER = 3 / 20 = **15%**
 
 WPM = Word Count / (Duration in Seconds ÷ 60)
 
-makefile
-Copy
-Edit
+
 
 **Example:**  
 If a student reads 90 words in 30 seconds:  
