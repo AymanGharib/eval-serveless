@@ -229,9 +229,6 @@ Below is a step-by-step breakdown of how the system works:
 
 WER = (Substitutions + Deletions + Insertions) / Total Words in Reference
 
-markdown
-Copy
-Edit
 
 **Example:**  
 If the original text has 20 words and 3 are incorrect (misheard, missing, or extra),  
