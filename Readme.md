@@ -142,8 +142,8 @@ Below is a step-by-step breakdown of how the system works:
 
 * Uploads the result as a JSON file to another S3 bucket :
 ```json
-{
-{"student_id": "pedri",
+
+{"student_id": "ayman",
 "transcript": "I didn't, but because she had to go to work, the only time she could do it was at 430 in the morning. But whenever I'd complain, my mother would just give me one of those looks, and she'd say, this is no picnic for me, either. But...", 
 "word_count": 48,
 "duration_seconds": 11.61, 
@@ -173,7 +173,7 @@ Below is a step-by-step breakdown of how the system works:
 
 ```json
 {
-  "id": "marry",
+  "id": "ayman",
   "duration_seconds": 11.61,
   "original_text": "But because she had to go to work, ...",
   "transcribed_text": "I didn't, but because she had to go to work, ...",
@@ -209,6 +209,43 @@ Below is a step-by-step breakdown of how the system works:
 
 ---
 
-#
+## 📘 Glossary – Key Terms Explained
+
+<details>
+<summary>🧠 Whisper</summary>
+
+[Whisper](https://github.com/openai/whisper) is an open-source automatic speech recognition (ASR) system developed by OpenAI. It converts spoken audio into text using deep learning models trained on multilingual and multitask audio data.
+</details>
+
+<details>
+<summary>📝 Word Error Rate (WER)</summary>
+
+**WER** is a metric that measures the accuracy of a speech recognition system by comparing the transcribed text to the original reference.
+
+**Formula:**
+
+WER = (Substitutions + Deletions + Insertions) / Total Words in Reference
+
+
+**Example:**  
+If the original text has 20 words and 3 are incorrect (misheard, missing, or extra),  
+then WER = 3 / 20 = **15%**
+</details>
+
+<details>
+<summary>🚀 Words Per Minute (WPM)</summary>
+
+**WPM** calculates how fast a person speaks. It helps assess reading fluency.
+
+**Formula:**
+
+WPM = Word Count / (Duration in Seconds ÷ 60)
+
+
+
+**Example:**  
+If a student reads 90 words in 30 seconds:  
+WPM = 90 / (30 ÷ 60) = **180 WPM**
+</details>
 
 
