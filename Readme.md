@@ -110,6 +110,9 @@ Below is a step-by-step breakdown of how the system works:
 
 ### 🔹 Step 2: Uploader Lambda
 
+
+![Student Speech Evaluation Pipeline](diagrams/screen.png)
+
 * Decodes the audio.
 * Stores the audio file in an S3 bucket (`student-audio-bucket-demo`).
 * Sends an SQS message with:
@@ -158,19 +161,22 @@ Below is a step-by-step breakdown of how the system works:
 "word_count": 48,
 "duration_seconds": 11.61, 
 "wpm": 248.16}
-}
+
 ```
 
 
 ---
 
 ### 🔹 Step 5: S3 Event Notification
+![Student Speech Evaluation Pipeline](diagrams/screen3.png)
 
 * The new transcription JSON triggers a second Lambda via S3 event.
 
 ---
 
 ### 🔹 Step 6: Evaluator Lambda
+
+![Student Speech Evaluation Pipeline](diagrams/screen2.png)
 
 * Loads both:
 
