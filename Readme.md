@@ -176,7 +176,7 @@ Below is a step-by-step breakdown of how the system works:
 
 ### 🔹 Step 6: Evaluator Lambda
 
-![Student Speech Evaluation Pipeline](diagrams/screen2.png)
+![Student Speech Evaluation Pipeline](diagrams/screen5.png)
 
 * Loads both:
 
