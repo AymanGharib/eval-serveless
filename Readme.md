@@ -111,7 +111,7 @@ Below is a step-by-step breakdown of how the system works:
 ### 🔹 Step 2: Uploader Lambda
 
 
-![Student Speech Evaluation Pipeline](diagrams/screen.png)
+![Student Speech Evaluation Pipeline](diagrams/screen4.png)
 
 * Decodes the audio.
 * Stores the audio file in an S3 bucket (`student-audio-bucket-demo`).
