@@ -145,8 +145,8 @@ Below is a step-by-step breakdown of how the system works:
 
 * Uploads the result as a JSON file to another S3 bucket :
 ```json
-{
-{"student_id": "pedri",
+
+{"student_id": "ayman",
 "transcript": "I didn't, but because she had to go to work, the only time she could do it was at 430 in the morning. But whenever I'd complain, my mother would just give me one of those looks, and she'd say, this is no picnic for me, either. But...", 
 "word_count": 48,
 "duration_seconds": 11.61, 
