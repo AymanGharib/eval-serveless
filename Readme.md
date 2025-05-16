@@ -92,6 +92,16 @@ Below is a step-by-step breakdown of how the system works:
   * `original_text`
   * `encoded_audio` (Base64)
 
+
+  **Example Payload message:**
+  ```json
+{
+    "id": "marry",
+    "original_text": "But because she had to go to work, the only time she could do it was at 4:30 in the morning. But whenever I'd complained, my mother would just give me one of those looks, and she'd say, this is no picnic for me either.",
+    "audio_base64": "AAAAGGZ0eXBtcDQyAAAAAG1wNDFpc29tAAAAKHV1aWRcpwj7Mo5CBahhZQ7KCpWWAAAADDEwLjAuMTkwNDUuMAAD6oFtZGF0A"
+}
+```
+
 ➡️ **API Gateway** receives this input and triggers the uploader Lambda function.
 
 
