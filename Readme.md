@@ -212,6 +212,48 @@ Below is a step-by-step breakdown of how the system works:
 
 ---
 
-#
+## 📘 Glossary – Key Terms Explained
+
+<details>
+<summary>🧠 Whisper</summary>
+
+[Whisper](https://github.com/openai/whisper) is an open-source automatic speech recognition (ASR) system developed by OpenAI. It converts spoken audio into text using deep learning models trained on multilingual and multitask audio data.
+</details>
+
+<details>
+<summary>📝 Word Error Rate (WER)</summary>
+
+**WER** is a metric that measures the accuracy of a speech recognition system by comparing the transcribed text to the original reference.
+
+**Formula:**
+
+WER = (Substitutions + Deletions + Insertions) / Total Words in Reference
+
+markdown
+Copy
+Edit
+
+**Example:**  
+If the original text has 20 words and 3 are incorrect (misheard, missing, or extra),  
+then WER = 3 / 20 = **15%**
+</details>
+
+<details>
+<summary>🚀 Words Per Minute (WPM)</summary>
+
+**WPM** calculates how fast a person speaks. It helps assess reading fluency.
+
+**Formula:**
+
+WPM = Word Count / (Duration in Seconds ÷ 60)
+
+makefile
+Copy
+Edit
+
+**Example:**  
+If a student reads 90 words in 30 seconds:  
+WPM = 90 / (30 ÷ 60) = **180 WPM**
+</details>
 
 
