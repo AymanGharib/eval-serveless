@@ -1,6 +1,3 @@
-
-
-
 ---
 
 # 🗂️ Student Speech Evaluation Pipeline – Serverless Architecture Project
