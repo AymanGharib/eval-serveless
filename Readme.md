@@ -2,8 +2,6 @@
 
 # 🗂️ Student Speech Evaluation Pipeline – Serverless Architecture Project
 
- **Problem:** In educational environments, evaluating student reading fluency manually is time-consuming and inconsistent, especially at scale.  
- **Solution:** This serverless pipeline automates speech transcription and evaluation using Whisper and jiwer, providing instant feedback on reading accuracy and speed — without managing any servers.
 
 ---
 
